@@ -1,9 +1,12 @@
 from random import randint
 
-inv = dict() 
+inv = ["Топор":0, "Трофей":0]
 
 def death():
-    print("Ты умер")
+    if lower(input("Ты умер, начать сначала?")) == "да":
+        start()
+    else:
+        exit()
 
 def panik(inv):
     if randint(1, 4) == 1:
@@ -11,6 +14,7 @@ def panik(inv):
         inv["Топор"] = 1
         survivers()
     else:
+        print("Ты натыкаешься на змею, она тебя кусает и ты погибаешь.")
         death()
 
 def start():
@@ -25,7 +29,7 @@ def start():
     if inNum in {1, 2, 3}:
         panik()
     else:
-        death()
+        challenge(inv)
     if inNum == 4:
         survivers()
 def challenge(inv):
@@ -34,6 +38,20 @@ def challenge(inv):
         survivers(inv)
     else:
         if inv["Топор"]:
-            print("Ты зарубил змею, будешь ")
-        print("Ты натыкаешься на змею, она тебя кусает и ты погибаешь.")
-    
+            if lower(input("Ты зарубил змею, будешь собирать труп? Да/Нет")) == "да":
+                print("Ты подобрал труп змеи и пошел дальше")
+                inv["Трофей"] = 1
+            else:
+                print("Ты пошел дальше")
+        else:
+            print("Ты натыкаешься на змею, она тебя кусает и ты погибаешь.")
+            death()
+def survivers(inv):
+    if inv["Трофей"]:
+        print("Выжившие встретили тебя как неплохого охотника, ты держал в руках труп ценной в их кругах змеи.")
+        win()
+    else:
+        print("Выжившие тебя не приняли и ты не смог найти себе пропитание в этом враждебном к слабым мире.")
+        death()
+def win():
+    print("Ты смог выжить в этом непростом квесте")
