@@ -31,10 +31,8 @@ def start():
     if inNum in {1, 2, 3}:
         panik()
     else:
-        challenge(inv)
-    if inNum == 4:
         sleep(3)
-        survivers()
+        challenge(inv)
 
 def challenge(inv):
     if randint(0, 1):
@@ -42,7 +40,7 @@ def challenge(inv):
         survivers(inv)
     else:
         if inv["Топор"]:
-            if lower(input("Ты зарубил змею, будешь собирать труп? Да/Нет")) == "да":
+            if lower(input("Ты зарубил змею, будешь собирать труп? Да/Нет\n")) == "да":
                 print("Ты подобрал труп змеи и пошел дальше")
                 inv["Трофей"] = 1
             else:
