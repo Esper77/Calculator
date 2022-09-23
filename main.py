@@ -1,8 +1,10 @@
 from random import randint
-
+import winsound
+from time import sleep
 inv = ["Топор":0, "Трофей":0]
 
 def death():
+    sleep(1)
     if lower(input("Ты умер, начать сначала?")) == "да":
         start()
     else:
@@ -31,7 +33,9 @@ def start():
     else:
         challenge(inv)
     if inNum == 4:
+        sleep(3)
         survivers()
+
 def challenge(inv):
     if randint(0, 1):
         print("Ты натыкаешься на группу выживших")
@@ -46,6 +50,7 @@ def challenge(inv):
         else:
             print("Ты натыкаешься на змею, она тебя кусает и ты погибаешь.")
             death()
+
 def survivers(inv):
     if inv["Трофей"]:
         print("Выжившие встретили тебя как неплохого охотника, ты держал в руках труп ценной в их кругах змеи.")
@@ -53,5 +58,7 @@ def survivers(inv):
     else:
         print("Выжившие тебя не приняли и ты не смог найти себе пропитание в этом враждебном к слабым мире.")
         death()
+
 def win():
     print("Ты смог выжить в этом непростом квесте")
+    winsound.PlaySound("victory_sJDDywi.wav", winsound.SND_ASYNC)
